@@ -1,7 +1,7 @@
-cdvar path = require('path')
+var path = require('path')
 var bmi = require('../../../ri-bmicalc/v2/src/index')
 
-function process(inputs){
+async function process(inputs){
   var bmiinput = {}
   var name = inputs.name;
   bmiinput.height=inputs.height

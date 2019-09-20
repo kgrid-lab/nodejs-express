@@ -46,13 +46,16 @@ router.post('/:naan/:name/:version/:ep', function(req, res, next) {
   var srcjs = req.app.locals.endpoints[key].post.artifact
   var func = require(srcjs)
   var output = {}
-  output.result = func(req.body)
   output.ko="ark:/"+req.params.naan+"/"+req.params.name
   output.input = req.body
   if(req.params.version){
     output.ko=output.ko +"/"+req.params.version
   }
-  res.send(output);
+  // res.send(func)
+  func(req.body).then(function(data){
+      output.result = data
+      res.send(output);
+  })
 });
 
 module.exports = router;
