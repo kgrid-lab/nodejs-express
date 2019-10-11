@@ -5,10 +5,10 @@ const kosController = require('../controllers/kos')
 /* GET KOs listing, KO and Implementation. */
 router.get('/', kosController.all);
 router.get('/:naan/:name', kosController.kobyid);
-router.get('/:naan/:name/:version', kosController.impbyid);
+// router.get('/:naan/:name/:version', kosController.impbyid);
 
 /* Retrieve the KO's service specification */
-router.get('/:naan/:name/:version/service', kosController.servicebyid);
+router.get('/:naan/:name/service', kosController.servicebyid);
 
 /* Import a KO */
 router.post('/', function(req, res, next) {

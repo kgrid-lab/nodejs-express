@@ -5,7 +5,7 @@ info:
   description: SCORE risk calculation v0.3.0.
 servers:
   - url: /score/calc/
-  
+
     description: SCORE risk calculation.
 tags:
   - name: KO Endpoints
@@ -38,7 +38,7 @@ paths:
               schema:
                 $ref: 'https://demo.kgrid.org/schemas/basicerror.yaml'
       x-kgrid-activation:
-        artifact: 'dist/main.js'
+        artifact: 'src/index.js'
         adapter: 'JAVASCRIPT'
         entry: 'score'
 components:

@@ -1,6 +1,6 @@
 {
-  "name": "activator",
-  "version": "0.0.0",
+  "name": "expressactivator",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "set DEBUG=activator:* && nodemon ./bin/www",

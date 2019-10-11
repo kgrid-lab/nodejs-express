@@ -11,7 +11,7 @@ const kosController = {
       var name= id[2]
       var key = 'ark:/'+naan+'/'+name
       if(!kolist[key]){
-        kolist[key]=path.dirname(req.app.locals.implementations[e])
+        kolist[key]=req.app.locals.implementations[e]
       }
     })
     res.send(kolist);
@@ -33,17 +33,11 @@ const kosController = {
     })
     res.send(output);
   },
-  impbyid (req, res, next) {
-    var key = 'ark:/'+req.params.naan+"/"+req.params.name+'/'+ req.params.version
-    var output = {}
-    output[key]=fs.readJsonSync(path.join(req.app.locals.implementations[key],'metadata.json'))
-    res.send(output);
-  },
   servicebyid (req, res, next){
-    var key = 'ark:/'+req.params.naan+"/"+req.params.name+'/'+ req.params.version
+    var key = 'ark:/'+req.params.naan+"/"+req.params.name
     var fileName = ''
     var meta = fs.readJsonSync(path.join(req.app.locals.implementations[key],'metadata.json'))
-    var serviceYaml = path.join(path.dirname(req.app.locals.implementations[key]), meta.hasServiceSpecification)
+    var serviceYaml = path.join(req.app.locals.implementations[key], meta.hasServiceSpecification)
     if(fs.existsSync(serviceYaml)){
       fileName = serviceYaml
        res.sendFile(fileName, function (err) {
