@@ -26,6 +26,7 @@ app.set('view engine', 'pug');
 app.locals.shelf=options.shelf || path.join(process.cwd(),'shelf')
 app.locals.devMode = options.development || false
 app.locals.endpoints={}
+app.locals.implementations={}
 
 app.use(cors())
 app.use(logger('dev'));

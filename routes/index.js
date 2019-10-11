@@ -35,10 +35,27 @@ router.get('/health', function(req, res, next) {
 router.get('/activate', function(req, res, next) {
   var obj = activateShelf(req.protocol+'://'+req.get('host'), req.app.locals.shelf, req.app.locals.devMode)
   var output = {}
-  output.endpoints=obj.endpoints
-  output.implementations=req.app.locals.implementations
-  req.app.locals.endpoints = obj.endpoints
-  req.app.locals.implementations = obj.implementations
+  output.endpoints={}
+  output.implementations={}
+  for(var key in obj.endpoints) {
+    output.endpoints[key] = obj.endpoints[key]
+    req.app.locals.endpoints[key] = obj.endpoints[key]
+  }
+  for(var key in obj.implementations) {
+    output.implementations[key] = obj.implementations[key]
+    req.app.locals.implementations[key] = obj.implementations[key]
+  }
+
+  obj = activateShelf('.', './node_modules/@kgrid', req.app.locals.devMode)
+
+  for(var key in obj.endpoints) {
+    output.endpoints[key] = obj.endpoints[key]
+    req.app.locals.endpoints[key] = obj.endpoints[key]
+  }
+  for(var key in obj.implementations) {
+    output.implementations[key] = obj.implementations[key]
+    req.app.locals.implementations[key] = obj.implementations[key]
+  }
   res.send(output);
 });
 

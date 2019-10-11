@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('activator:server');
 var http = require('http');
+const fs = require('fs-extra')
 const activateShelf = require('../public/javascripts/activateshelf')
 /**
  * Get port from environment and store in Express.
@@ -29,10 +30,25 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-var obj = activateShelf('.', app.locals.shelf, app.locals.devMode)
-app.locals.endpoints = obj.endpoints
-app.locals.implementations = obj.implementations
-
+var obj = {}
+if(fs.existsSync(app.locals.shelf)){
+  obj = activateShelf('.', app.locals.shelf, app.locals.devMode)
+  for(var key in obj.endpoints) {
+    app.locals.endpoints[key] = obj.endpoints[key]
+  }
+  for(var key in obj.implementations) {
+    app.locals.implementations[key] = obj.implementations[key]
+  }
+}
+if(fs.existsSync('./node_modules/@kgrid')){
+  obj = activateShelf('.', './node_modules/@kgrid', app.locals.devMode)
+  for(var key in obj.endpoints) {
+    app.locals.endpoints[key] = obj.endpoints[key]
+  }
+  for(var key in obj.implementations) {
+    app.locals.implementations[key] = obj.implementations[key]
+  }
+}
 /**
  * Normalize a port into a number, string, or false.
  */
