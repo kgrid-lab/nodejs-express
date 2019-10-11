@@ -1,35 +1,35 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: BMI Calc
-  description: Calculates BMI
+  title: 'Hello, World'
+  description: hello world
 servers:
-  - url: /ri/bmicalc/v2
-    description: BMI Calculator
+  - url: /node/executive/
+    description: Hello world
 tags:
-  - name: BMI Calculator Endpoint
-    description: BMI Endpoints
+  - name: KO Endpoints
+    description: Hello World Endpoints
 paths:
-  /bmicalc:
+  /process:
     post:
       tags:
         - KO Endpoints
-      description: BMI Calculator.
-      operationId: bmi
+      description: process.
+      operationId: process
       requestBody:
         description: inputs
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/measures'
+              $ref: '#/components/schemas/input'
       responses:
         '200':
           description: response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/bmiOutput'
+                $ref: '#/components/schemas/output'
         default:
           description: unexpected error
           content:
@@ -39,29 +39,32 @@ paths:
       x-kgrid-activation:
         artifact: 'src/index.js'
         adapter: 'JAVASCRIPT'
-        entry: 'bmi_calc'
+        entry: 'process'
 components:
   schemas:
-    measures:
+    input:
       required:
+        - name
         - height
         - weight
       properties:
+        name:
+          type: string
+          x-kgrid-label: 'Please enter your name'
+          x-kgrid-unit: ''
+          example: Bob
         height:
           type: number
-          x-kgrid-unit: 'm'
           example: 1.7
         weight:
           type: number
-          x-kgrid-unit: 'kg'
-          example: 70.2
-    bmiOutput:
+          example: 72.5
+    output:
       required:
         - result
       properties:
         result:
-          type: number
-          example: 25
+          type: object
     error:
       required:
         - code

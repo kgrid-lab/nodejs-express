@@ -1,20 +1,17 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: SCORE risk calculation v0.3.0
-  description: SCORE risk calculation v0.3.0.
+  title: SCORE risk calculation v0.1.0
+  description: SCORE risk calculation v0.1.0.
 servers:
-  - url: /score/calc/v0.3.0
-    description: SCORE risk calculation.
+  - url: /score/calc/
 tags:
   - name: KO Endpoints
-    description: SCORE risk calculation v0.3.0.
 paths:
   /score:
     post:
       tags:
         - KO Endpoints
-      description: SCORE risk calculation.
       operationId: cvdriskscore
       requestBody:
         description: inputs
@@ -37,7 +34,7 @@ paths:
               schema:
                 $ref: 'https://demo.kgrid.org/schemas/basicerror.yaml'
       x-kgrid-activation:
-        artifact: 'dist/main.js'
+        artifact: 'src/index.js'
         adapter: 'JAVASCRIPT'
         entry: 'score'
 components:
@@ -88,8 +85,27 @@ components:
           x-kgrid-unit: ''
           example: false
     output:
+      type: object
       required:
         - result
       properties:
         result:
+          type: object
+          properties:
+            cvdrisk:
+              type: object
+              properties:
+                total:
+                  type: number
+                  x-kgrid-label: Total CVD Risk
+                  example: 0.12
+                chd:
+                  type: number
+                  x-kgrid-label: CHD Risk
+                  example: 0.04
+                nonchd:
+                  type: number
+                  x-kgrid-label: non-CHD Risk
+                  example: 0.08
+        info:
           type: object

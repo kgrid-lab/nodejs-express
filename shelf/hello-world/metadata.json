@@ -1,0 +1,11 @@
+{
+  "@id": "hello-world",
+  "@type": "koio:KnowledgeObject",
+  "identifier": "ark:/hello/world",
+  "title": "KnowledgeObject koio v1 of Hello World",
+  "hasServiceSpecification": "service.yaml",
+  "hasPayload": "src/welcome.js",
+  "@context": [
+    "http://kgrid.org/koio/contexts/KnowledgeObject.jsonld"
+  ]
+}

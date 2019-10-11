@@ -4,7 +4,7 @@ info:
   title: 'Hello, World'
   description: hello world
 servers:
-  - url: /hello/world/v0.1.0/
+  - url: /hello/world/
     description: Hello world
 tags:
   - name: KO Endpoints

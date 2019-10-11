@@ -51,11 +51,15 @@ router.post('/:naan/:name/:version/:ep', function(req, res, next) {
   if(req.params.version){
     output.ko=output.ko +"/"+req.params.version
   }
-  // res.send(func)
-  func(req.body).then(function(data){
-      output.result = data
+  if(func instanceof Promise){
+      func(req.body).then(function(data){
+        output.result = data
+        res.send(output);
+      })
+    }else {
+      output.result = func(req.body)
       res.send(output);
-  })
+    }
 });
 
 module.exports = router;

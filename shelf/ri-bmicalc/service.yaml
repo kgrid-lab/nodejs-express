@@ -1,35 +1,35 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: 'Hello, World'
-  description: hello world
+  title: BMI Calc
+  description: Calculates BMI
 servers:
-  - url: /node/executive/v0.1.0/
-    description: Hello world
+  - url: /ri/bmicalc/
+    description: BMI Calculator
 tags:
-  - name: KO Endpoints
-    description: Hello World Endpoints
+  - name: BMI Calculator Endpoint
+    description: BMI Endpoints
 paths:
-  /process:
+  /bmicalc:
     post:
       tags:
         - KO Endpoints
-      description: process.
-      operationId: process
+      description: BMI Calculator.
+      operationId: bmi
       requestBody:
         description: inputs
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/input'
+              $ref: '#/components/schemas/measures'
       responses:
         '200':
           description: response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/output'
+                $ref: '#/components/schemas/bmiOutput'
         default:
           description: unexpected error
           content:
@@ -39,32 +39,29 @@ paths:
       x-kgrid-activation:
         artifact: 'src/index.js'
         adapter: 'JAVASCRIPT'
-        entry: 'process'
+        entry: 'bmi_calc'
 components:
   schemas:
-    input:
+    measures:
       required:
-        - name
         - height
         - weight
       properties:
-        name:
-          type: string
-          x-kgrid-label: 'Please enter your name'
-          x-kgrid-unit: ''
-          example: Bob
         height:
           type: number
+          x-kgrid-unit: 'm'
           example: 1.7
         weight:
           type: number
-          example: 72.5
-    output:
+          x-kgrid-unit: 'kg'
+          example: 70.2
+    bmiOutput:
       required:
         - result
       properties:
         result:
-          type: object
+          type: number
+          example: 25
     error:
       required:
         - code

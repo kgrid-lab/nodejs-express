@@ -1,0 +1,11 @@
+{
+  "@id": "try-r",
+  "@type": "koio:KnowledgeObject",
+  "identifier": "ark:/try/r",
+  "title": "KnowledgeObject koio v1 of Hello World",
+  "hasServiceSpecification": "service.yaml",
+  "hasPayload": "src/try.js",
+  "@context": [
+    "http://kgrid.org/koio/contexts/KnowledgeObject.jsonld"
+  ]
+}
