@@ -12,12 +12,12 @@ router.get('/:naan/:name/service', kosController.servicebyid);
 
 /* Import a KO */
 router.post('/', function(req, res, next) {
-  res.send('Importing a packaged KO to the shelf');
+  res.send('[TBI] Importing a packaged KO to the shelf');
 });
 
 /* Import a list of KOs */
 router.post('/manifest', function(req, res, next) {
-  res.send('Importing packaged KOs listed in a manifest file to the shelf ');
+  res.send('[TBI] Importing packaged KOs listed in a manifest file to the shelf ');
 });
 
 module.exports = router;

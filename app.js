@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
 const commandLineArgs = require('command-line-args')
+const configJson = require('./config.json')
 
 const optionDefinitions = [
   { name: 'shelf', alias: 's', type: String, defaultOption: true },
@@ -26,7 +27,8 @@ app.set('view engine', 'pug');
 app.locals.shelf=options.shelf || path.join(process.cwd(),'shelf')
 app.locals.devMode = options.development || false
 app.locals.endpoints={}
-app.locals.implementations={}
+app.locals.kobjects={}
+app.locals.settings = configJson
 
 app.use(cors())
 app.use(logger('dev'));

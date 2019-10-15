@@ -4,12 +4,12 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   console.log(req)
-  res.send('respond with a resource');
+  res.send('[TBI] respond with a resource');
 });
 
 router.post('/', function(req, res, next) {
   console.log(req.body)
-  res.send('respond with a resource for POST');
+  res.send('[TBI] respond with a resource for POST');
 });
 
 module.exports = router;

@@ -6,7 +6,7 @@ const epsController = {
     res.send(req.app.locals.endpoints);
   },
   epbyid (req, res, next) {
-    var key = '/'+req.params.naan+"/"+req.params.name+'/'+ req.params.version+'/'+req.params.ep
+    var key = '/'+req.params.naan+"/"+req.params.name+"/"+req.params.ep
     var output = {}
     output[key]= req.app.locals.endpoints[key]
     res.send(output);

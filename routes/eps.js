@@ -4,6 +4,6 @@ const epsController = require('../controllers/eps')
 
 /* GET KOs listing, KO and Implementation. */
 router.get('/', epsController.all);
-router.get('/:naan/:name/:version/:ep', epsController.epbyid);
+router.get('/:naan/:name/:ep', epsController.epbyid);
 
 module.exports = router;
