@@ -9,6 +9,7 @@ const filterFn = item => {
 }
 
 function activateShelf(baseurl, shelf, applocals){
+    var artifact = ""
     var endpointsObj={}
     var koObj = {}
     var mode = applocals.devMode
