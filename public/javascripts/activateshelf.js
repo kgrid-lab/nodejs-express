@@ -64,7 +64,11 @@ function activateShelf(baseurl, shelf, applocals){
               if(serviceObj.paths[e][method]['x-kgrid-activation']){
                 artifact = serviceObj.paths[e][method]['x-kgrid-activation'].artifact    // Read artifact
               }
-              ep[method].artifact=path.join(implePath,artifact)
+              if(Array.isArray(artifact)){
+                ep[method].artifact=path.join(implePath,artifact[0])  
+              } else {
+                ep[method].artifact=path.join(implePath,artifact)
+              }
             })
             if(!endpointsObj[key]){
               endpointsObj[key] ={}

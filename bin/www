@@ -27,6 +27,7 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 var obj = {}
+console.log(app.locals.shelf)
 if(fs.existsSync(app.locals.shelf)){
   obj = activateShelf('.', app.locals.shelf, app.locals)
 }

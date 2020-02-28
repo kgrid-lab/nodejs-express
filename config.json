@@ -1,3 +1,5 @@
 {
+  "kgridServiceRegistryURL":"https://activator.kgrid.org",
+  "kgridLibraryURL":"https://library.kgrid.org",
   "overwriteExistingEndpoints": true
 }

@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
+const path = require('path');
+const fs = require('fs-extra')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
@@ -8,10 +9,10 @@ const commandLineArgs = require('command-line-args')
 const configJson = require('./config.json')
 
 const optionDefinitions = [
-  { name: 'shelf', alias: 's', type: String, defaultOption: true },
+  { name: 'shelf', alias: 's', type: String, defaultOption: false },
   { name: 'development', alias:'D', type: Boolean}
 ]
-const options = commandLineArgs(optionDefinitions)
+const options = commandLineArgs(optionDefinitions, { partial: true })
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -24,14 +25,31 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // app locals
-app.locals.shelf=options.shelf || path.join(process.cwd(),'shelf')
+var shelfPath = options.shelf || path.join(process.cwd(),'shelf')
+fs.ensureDirSync(shelfPath)
+var registryFile = path.join(shelfPath,"koregistry.json")
+if(!fs.pathExistsSync(registryFile)){
+  fs.ensureFileSync(registryFile)
+  fs.writeJSONSync(registryFile, {},{spaces: 4} )
+}
+var packageFile = path.join(shelfPath,"package.json")
+if(!fs.pathExistsSync(packageFile)){
+  fs.ensureFileSync(packageFile)
+  fs.writeJSONSync(packageFile, {	"name":"expressactivatorshelf"},{spaces: 4} )
+}
+
+
+
+app.locals.shelf=shelfPath
 app.locals.devMode = options.development || false
 app.locals.endpoints={}
 app.locals.kobjects={}
 app.locals.settings = configJson
 
 app.use(cors())
-app.use(logger('dev'));
+if(process.env.DEBUG){
+  app.use(logger('dev'))
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
