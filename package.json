@@ -5,7 +5,8 @@
   "scripts": {
     "start": "set DEBUG=activator:* && nodemon ./bin/www",
     "start:dev": "set DEBUG=activator:* && nodemon ./bin/www --development",
-    "debug": "set DEBUG=activator:* && nodemon ./bin/www --shelf=c:/kgridLabRepo/ccf-r01/collection"
+    "debug": "set DEBUG=activator:* && nodemon ./bin/www --shelf=c:/kgridLabRepo/taksler-r01/collection",
+    "test": "mocha --timeout 10000"
   },
   "dependencies": {
     "command-line-args": "^5.1.1",
